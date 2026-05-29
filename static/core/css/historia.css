@@ -11,7 +11,6 @@ body {
     flex-direction: column;
 }
  
-/* ─── HEADER / NAV ─────────────────────────────────────── */
  
 header {
     background: white;
@@ -75,7 +74,6 @@ nav {
     background-color: #8e6a2d;
 }
  
-/* ─── MAIN ──────────────────────────────────────────────── */
  
 main {
     flex: 1;
@@ -83,7 +81,6 @@ main {
     flex-direction: column;
 }
  
-/* ─── HERO IMAGE ────────────────────────────────────────── */
  
 .imagemhisto {
     width: 100%;
@@ -122,7 +119,6 @@ main {
     font-size: 40px;
 }
  
-/* ─── DESCRIÇÃO ─────────────────────────────────────────── */
  
 .cordescricao {
     background-color: #F6F9F7;
@@ -139,7 +135,6 @@ main {
     font-family: 'Space Grotesk', sans-serif;
 }
  
-/* ─── CARDS ESTATÍSTICAS ────────────────────────────────── */
  
 .containerverde {
     width: 100%;
@@ -175,7 +170,6 @@ main {
     color: #677E73;
 }
  
-/* ─── TRAJETO / TIMELINE ────────────────────────────────── */
  
 .cor2 {
     background-color: #F6F9F7;
@@ -297,7 +291,6 @@ main {
     font-family: 'Space Grotesk', sans-serif;
 }
  
-/* ─── PROPÓSITO ─────────────────────────────────────────── */
  
 .cor {
     background-color: #F0F4F2;
@@ -324,7 +317,6 @@ main {
     font-size: 16px;
 }
  
-/* ─── CARTÕES PROPÓSITO ─────────────────────────────────── */
  
 .cartaoorg {
     display: flex;
@@ -387,7 +379,6 @@ main {
     display: flex;
 }
  
-/* ─── ENVOLVER ──────────────────────────────────────────── */
  
 .envolver {
     background-color: #2E6B4F;
@@ -397,6 +388,8 @@ main {
     justify-content: center;
     padding: 60px 20px 30px;
     text-align: center;
+    flex: 1;          
+    min-height: 70vh;
 }
  
 .envolver-content {
@@ -474,7 +467,6 @@ main {
     color: #e8a87c;
 }
  
-/* ─── FOOTER ────────────────────────────────────────────── */
  
 footer {
     background-color: #372C25;
