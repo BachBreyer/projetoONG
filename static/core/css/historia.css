@@ -418,6 +418,7 @@ main {
     justify-content: center;
     flex-wrap: wrap;
 }
+
  
 .btn-ajudar {
     display: flex;
@@ -434,7 +435,9 @@ main {
 }
  
 .btn-ajudar:hover {
-    background-color: #b8674d;
+    background-color:  #d9826a;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
  
 .btn-saiba {
@@ -452,7 +455,10 @@ main {
 }
  
 .btn-saiba:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background: white;
+    color: #2f6b4f;
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
  
 .rodape {
@@ -565,6 +571,34 @@ i {
     font-size: 14px;
 }
  
+.reveal,
+.reveal-card {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.reveal.visible,
+.reveal-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.texto-anima {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: aparecer 1s ease forwards;
+}
+
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
  
 @media (max-width: 1024px) {
     .containerverde {
