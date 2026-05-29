@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}ACITP - Entrar{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <div class="parteverde">
+            <div class="heart">♡</div>
+            <h1>Cuidar é um ato de amor</h1>
+            <p>Juntos, proporcionamos dignidade e carinho aos nossos idosos. Cada gesto de cuidado faz a diferença.</p>
+        </div>
+
+        <div class="partebranca">
+            <div class="form-container">
+                <h2>Bem-vindo de volta</h2>
+                <p>Entre com sua conta para continuar.</p>
+
+                {% if form.errors %}
+                    <p class="esqueceu">E-mail ou senha invalidos.</p>
+                {% endif %}
+
+                <form id="loginForm" method="post">
+                    {% csrf_token %}
+                    <label for="iemail">E-mail ou usuário</label>
+                    <input type="text" id="iemail" name="username" placeholder="seu@email.com ou admin" required>
+
+                    <div class="senha-container">
+                        <label for="isenha">Senha</label>
+                        <input type="password" id="isenha" name="password" required placeholder="senha">
+                        <span id="versenha">👁</span>
+                    </div>
+
+                    <a href="{% url 'home' %}" class="esqueceu">Esqueceu a senha?</a>
+
+                    <button type="submit" class="btn-entrar-form">Entrar</button>
+                </form>
+
+                <div class="cadastre">
+                   <p>Não tem uma conta? <a href="{% url 'cadastro' %}">Cadastre-se</a> </p>
+                </div>
+            </div>
+        </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'core/js/login.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}ACITP - Casa do Idoso{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+  {% block extra_css %}{% endblock %}
+  <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="{% url 'home' %}" class="logo">
+        <span><i class="fa-solid fa-heart"></i></span> ACITP
+      </a>
+
+      <ul class="menu">
+        <li><a href="{% url 'home' %}">Início</a></li>
+        <li><a href="{% url 'historia' %}">Nossa História</a></li>
+        <li><a href="{% url 'eventos' %}">Eventos</a></li>
+        <li><a href="{% url 'doacoes' %}">Doações</a></li>
+        <li><a href="{% url 'voluntariado' %}">Voluntariado</a></li>
+        <li><a href="{% url 'depoimentos' %}">Depoimentos</a></li>
+        <li><a href="{% url 'home' %}#footer">Contato</a></li>
+        {% if request.user.is_authenticated and request.user.is_staff %}
+          <li><a href="/admin/" class="botaoentrar painel-link">Painel</a></li>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'logout' %}" class="botaoentrar">Sair</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}" class="botaoentrar">Entrar</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer id="footer">
+    <div class="footer-content">
+      <div>
+        <div class="footer-logo">
+          <i class="fa-solid fa-heart"></i>
+          <span>ACITP</span>
+        </div>
+
+        <p class="footer-desc">
+          Transformando vidas com amor e dignidade desde 2010. Cada idoso merece ser cuidado com carinho.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h3>Contato</h3>
+        <div class="contact-info">
+          <p><a href="tel:+5521964414945"><i class="fa-solid fa-phone"></i> (+55) 21 96441-4945</a></p>
+          <p><a href="mailto:acitp2010@gmail.com"><i class="fa-solid fa-envelope"></i> acitp2010@gmail.com</a></p>
+          <p><i class="fa-solid fa-location-dot"></i> Estrada do Babi, 14455, Vila Magalhães em Belford Roxo</p>
+        </div>
+      </div>
+
+      <div class="footer-column">
+        <h3>Links Úteis</h3>
+        <ul>
+          <li><a href="{% url 'historia' %}">Nossa História</a></li>
+          <li><a href="{% url 'eventos' %}">Eventos</a></li>
+          <li><a href="{% url 'doacoes' %}">Doações</a></li>
+          <li><a href="{% url 'voluntariado' %}">Voluntariado</a></li>
+          <li><a href="{% url 'depoimentos' %}">Depoimentos</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      © 2026 ONG ACITP. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
