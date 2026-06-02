@@ -629,7 +629,6 @@ i {
         gap: 40px;
     }
  
-    /* Timeline vira 1 coluna, imagem desce */
     .trajeto {
         grid-template-columns: 1fr;
         padding: 50px 20px;
