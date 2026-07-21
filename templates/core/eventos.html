@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}ACITP - Eventos{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/eventos.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="eventos" id="eventos">
+  <div class="container" id="eventos-container">
+    {% for evento in eventos %}
+      <div class="evento-row {% cycle '' 'reverse' %}">
+        <div class="evento-text">
+          <h2>{{ evento.titulo }}</h2>
+          <p>{{ evento.descricao }}</p>
+          <p><strong>{{ evento.data_inicio|date:"d/m/Y H\\h" }}</strong>{% if evento.local %} - {{ evento.local }}{% endif %}</p>
+        </div>
+        <div class="evento-img">
+          {% if evento.imagem %}
+            <img src="{{ evento.imagem.url }}" alt="Imagem de {{ evento.titulo }}">
+          {% else %}
+            <img src="{% static 'core/img/home/eventospp.png' %}" alt="Imagem padrão de evento">
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <div class="evento-row">
+        <div class="evento-text">
+          <h2>Nenhum evento cadastrado</h2>
+          <p>Novas campanhas e ações sociais serão divulgadas em breve.</p>
+        </div>
+        <div class="evento-img">
+          <img src="{% static 'core/img/home/eventospp.png' %}" alt="Imagem padrão de evento">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}ACITP - Transparência{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/eventos.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="eventos">
+  <div class="container">
+    {% for prestacao in prestacoes %}
+      <div class="evento-row">
+        <div class="evento-text">
+          <h2>{{ prestacao.titulo }}</h2>
+          <p>{{ prestacao.resumo }}</p>
+          <p>Período: {{ prestacao.periodo_inicio|date:"d/m/Y" }} a {{ prestacao.periodo_fim|date:"d/m/Y" }}</p>
+          <p>Arrecadado: R$ {{ prestacao.valor_arrecadado }} | Utilizado: R$ {{ prestacao.valor_utilizado }}</p>
+          {% if prestacao.arquivo %}<p><a href="{{ prestacao.arquivo.url }}">Baixar arquivo</a></p>{% endif %}
+        </div>
+        <div class="evento-img" style="background: #d9d9d9;"></div>
+      </div>
+    {% empty %}
+      <div class="evento-row">
+        <div class="evento-text">
+          <h2>Prestação de contas</h2>
+          <p>Os relatórios de transparência serão publicados nesta área.</p>
+        </div>
+        <div class="evento-img" style="background: #d9d9d9;"></div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

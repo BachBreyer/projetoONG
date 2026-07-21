@@ -1,0 +1,75 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}ACITP - Cadastro{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/cadastro.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+        <div class="parteverde">
+            <div class="circulo3"></div>   
+            <div class="heart">♡</div>
+            <h1>Faça parte desta família</h1>
+            <p>Cadastre-se e ajude a transformar a vida de quem já fez tanto por nós. Cada voluntario é essencial</p>
+        </div>
+
+        <div class="partebranca">
+            <div class="form-container">
+                <h2>Criar conta</h2>
+                <p>Preencha seus dados para se cadastrar</p>
+
+                {% if form.errors %}
+                    <div class="esqueceu">
+                        <p>Confira os dados informados e tente novamente:</p>
+                        {{ form.non_field_errors }}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ field.label }}: {{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form id="cadastroForm" method="post">
+                    {% csrf_token %}
+
+                    <label for="inome">Nome completo</label>
+                    <input type="text" id="inome" name="nome" placeholder="Maria Silva" required>
+
+                    <label for="itelefone">Telefone</label>
+                    <input type="tel" id="itelefone" name="telefone" placeholder="(11) 99999-9999">
+
+                    <label for="iemail">E-mail</label>
+                    <input type="email" id="iemail" name="email" placeholder="seu@email.com" required>
+
+                    <div class="senha-container">
+                        <label for="isenha">Senha</label>
+                        <input type="password" id="isenha" name="password1" placeholder="•••••••" required>
+                        <span id="versenha">👁</span>
+
+                        <label for="iconfirmasenha">Confirmar senha</label>
+                        <input type="password" id="iconfirmasenha" name="password2" placeholder="•••••••" required>
+
+                    </div>
+
+                
+                    <button type="submit" class="btn-entrar-form">Cadastrar</button>
+
+                </form>
+
+                <div class="cadastre">
+                   <p>Já tem conta? <a href="{% url 'login' %}">Entrar</a> </p>
+                </div>
+            </div>
+        </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'core/js/login.js' %}"></script>
+{% endblock %}
