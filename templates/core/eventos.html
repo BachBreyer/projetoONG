@@ -1,5 +1,13 @@
-<link rel="stylesheet" href="{% static 'core/css/eventos.css' %}">
+{% extends "core/base.html" %}
+{% load static %}
 
+{% block title %}ACITP - Eventos{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/eventos.css' %}">
+{% endblock %}
+
+{% block content %}
 <section class="eventos-section">
     <div class="container">
         <!-- Cabeçalho da Seção -->
@@ -28,3 +36,4 @@
         {% endif %}
     </div>
 </section>
+{% endblock %}
