@@ -1,58 +1,72 @@
-{% extends "core/base.html" %}
-{% load static %}
+<section class="max-md:py-16 py-24">
+      <div class="max-lg:grid-cols-2 max-md:grid-cols-[1fr] max-sm:w-[min(1180px,100%_-_theme(width.4))] w-[min(1180px,100%_-_theme(width.8))] mx-auto grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-y-5 gap-x-5 grid">
 
-{% block title %}ACITP - Eventos{% endblock %}
-
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'core/css/eventos.css' %}">
-{% endblock %}
-
-{% block content %}
-<section class="page-hero">
-    <div class="container">
-        <span class="eyebrow">Agenda solidária</span>
-        <h1>Nossos Eventos</h1>
-        <p>Acompanhe a programação, festividades e encontros da ACITP. Participe e traga sua alegria para nossos idosos.</p>
-    </div>
-</section>
-
-<section class="section eventos">
-    <div class="container">
-        <div id="eventos-container">
-            {% for event in events %}
-                <!-- A classe 'reverse' é aplicada de forma alternada -->
-                <div class="evento-row {% if forloop.counter0|divisibleby:2 == False %}reverse{% endif %}">
-                    <div class="evento-text">
-                        <h2>{{ event.title }}</h2>
-                        <p>{{ event.description }}</p>
-                        <div style="margin-top: 15px; font-size: 13px; color: var(--muted);">
-                            <i class="fa-solid fa-calendar-day"></i> {{ event.starts_at|date:"d/m/Y H:i" }} | 
-                            <i class="fa-solid fa-location-dot"></i> {{ event.location }}
-                        </div>
-                    </div>
-                    
-                    {% if event.image %}
-                        <div class="evento-img" style="background-image: url('{{ event.image.url }}'); background-size: cover; background-position: center;"></div>
-                    {% else %}
-                        <div class="evento-img" style="background: #d9d9d9;"></div>
-                    {% endif %}
-                </div>
-            {% empty %}
-                <!-- Card de Nenhum Evento (idêntico à referência) -->
-                <div class="empty-state">
-                    <div class="empty-state-icon">
-                        <i class="fa-solid fa-calendar-xmark"></i>
-                    </div>
-                    <h2>Nenhum evento cadastrado</h2>
-                    <p>Em breve teremos novas programações. Fique atento!</p>
-                </div>
-            {% endfor %}
+        <!-- Card de Evento 1 -->
+        <div class="bg-white p-6 rounded-3xl border border-solid border-stone-200 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col">
+          <div class="h-48 rounded-2xl bg-stone-100 mb-6 overflow-hidden relative">
+            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl text-center shadow-sm">
+              <span class="block text-orange-400 font-bold text-xl leading-none">15</span>
+              <span class="block text-stone-500 text-xs uppercase font-semibold mt-1">Jul</span>
+            </div>
+            <!-- Imagem ilustrativa do evento (Substitua o src pela imagem real) -->
+            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Evento ACITP" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-[bold] [font-family:Playfair_Display,serif] text-2xl leading-tight mb-3 text-stone-800">Arraiá Solidário</h3>
+          <p class="text-stone-500 text-sm mb-6 flex-grow">Venha participar da nossa festa com comidas típicas, música e muita alegria junto aos nossos idosos.</p>
+          <div class="flex flex-col gap-2 mb-6">
+            <div class="text-sm text-stone-600 flex items-center gap-2">
+              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> 14:00 - 18:00
+            </div>
+            <div class="text-sm text-stone-600 flex items-center gap-2">
+              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> Sede da ACITP
+            </div>
+          </div>
+          <a href="#" class="no-underline text-center w-full cursor-pointer font-semibold duration-300 ease-in-out px-6 py-3 rounded-xl border border-solid border-transparent text-stone-800 bg-orange-300 hover:brightness-110 active:-translate-y-px">Mais Informações</a>
         </div>
 
-        <!-- Indicador de Loading -->
-        <div id="loader" class="loader" style="display: none; text-align: center;">
-            <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--green);"></i>
+        <!-- Card de Evento 2 -->
+        <div class="bg-white p-6 rounded-3xl border border-solid border-stone-200 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col">
+          <div class="h-48 rounded-2xl bg-stone-100 mb-6 overflow-hidden relative">
+            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl text-center shadow-sm">
+              <span class="block text-orange-400 font-bold text-xl leading-none">20</span>
+              <span class="block text-stone-500 text-xs uppercase font-semibold mt-1">Ago</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bazar Beneficente" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-[bold] [font-family:Playfair_Display,serif] text-2xl leading-tight mb-3 text-stone-800">Bazar Beneficente</h3>
+          <p class="text-stone-500 text-sm mb-6 flex-grow">Renove seu guarda-roupa e ajude a nossa causa. Diversas peças em ótimo estado com preços imperdíveis.</p>
+          <div class="flex flex-col gap-2 mb-6">
+            <div class="text-sm text-stone-600 flex items-center gap-2">
+              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> 09:00 - 17:00
+            </div>
+            <div class="text-sm text-stone-600 flex items-center gap-2">
+              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> Galpão Comunitário
+            </div>
+          </div>
+          <a href="#" class="no-underline text-center w-full cursor-pointer font-semibold duration-300 ease-in-out px-6 py-3 rounded-xl border border-solid border-transparent text-stone-800 bg-orange-300 hover:brightness-110 active:-translate-y-px">Mais Informações</a>
         </div>
-    </div>
-</section>
-{% endblock %}
+
+        <!-- Card de Evento 3 -->
+        <div class="bg-white p-6 rounded-3xl border border-solid border-stone-200 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col">
+          <div class="h-48 rounded-2xl bg-stone-100 mb-6 overflow-hidden relative">
+            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl text-center shadow-sm">
+              <span class="block text-orange-400 font-bold text-xl leading-none">12</span>
+              <span class="block text-stone-500 text-xs uppercase font-semibold mt-1">Out</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Almoço de Confraternização" class="w-full h-full object-cover">
+          </div>
+          <h3 class="font-[bold] [font-family:Playfair_Display,serif] text-2xl leading-tight mb-3 text-stone-800">Almoço Especial</h3>
+          <p class="text-stone-500 text-sm mb-6 flex-grow">Um almoço delicioso feito com muito carinho para celebrar as conquistas do ano com nossos voluntários e idosos.</p>
+          <div class="flex flex-col gap-2 mb-6">
+            <div class="text-sm text-stone-600 flex items-center gap-2">
+              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> 12:00 - 15:00
+            </div>
+            <div class="text-sm text-stone-600 flex items-center gap-2">
+              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> Sede da ACITP
+            </div>
+          </div>
+          <a href="#" class="no-underline text-center w-full cursor-pointer font-semibold duration-300 ease-in-out px-6 py-3 rounded-xl border border-solid border-transparent text-stone-800 bg-orange-300 hover:brightness-110 active:-translate-y-px">Mais Informações</a>
+        </div>
+
+      </div>
+    </section>
