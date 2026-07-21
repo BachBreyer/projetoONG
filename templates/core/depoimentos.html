@@ -8,21 +8,34 @@
 {% endblock %}
 
 {% block content %}
-<section class="depoimentos">
-  <div class="container">
-    <div class="section-tag">O QUE DIZEM</div>
-    <h2 class="section-title">Depoimentos</h2>
-
-    <div class="cards">
-      {% for depoimento in depoimentos %}
-        <div class="card">
-          <span class="quote-icon">”</span>
-          <p>"{{ depoimento.texto }}"</p>
-          <div class="divider"></div>
-          <div class="name">{{ depoimento.nome }}</div>
+<section class="depoimentos-section">
+    <div class="container">
+        <!-- Cabeçalho da Seção -->
+        <div class="section-header">
+            <p class="section-eyebrow">
+                <i class="fa-solid fa-quote-left"></i> Vozes que inspiram
+            </p>
+            <h2 class="section-title">Depoimentos</h2>
+            <p class="section-subtitle">Histórias de amor, cuidado e transformação compartilhadas por nossos idosos, familiares e voluntários.</p>
         </div>
-      {% endfor %}
+
+        <!-- Lógica de Exibição -->
+        {% if depoimentos %}
+            <div class="grid-depoimentos">
+                {% for depoimento in depoimentos %}
+                    <!-- Seu código de card de depoimento individual aqui -->
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- Card de Estado Vazio -->
+            <div class="empty-state-card">
+                <div class="empty-state-icon">
+                    <i class="fa-solid fa-comment-slash"></i>
+                </div>
+                <h3 class="empty-state-title">Ainda não temos depoimentos</h3>
+                <p class="empty-state-text">Em breve compartilharemos as primeiras histórias aqui.</p>
+            </div>
+        {% endif %}
     </div>
-  </div>
 </section>
 {% endblock %}
