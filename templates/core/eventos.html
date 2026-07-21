@@ -1,72 +1,78 @@
-<section class="max-md:py-16 py-24">
-      <div class="max-lg:grid-cols-2 max-md:grid-cols-[1fr] max-sm:w-[min(1180px,100%_-_theme(width.4))] w-[min(1180px,100%_-_theme(width.8))] mx-auto grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-y-5 gap-x-5 grid">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ACTP — Eventos</title>
+    <link rel="stylesheet" href="eventos.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
 
-        <!-- Card de Evento 1 -->
-        <div class="bg-white p-6 rounded-3xl border border-solid border-stone-200 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col">
-          <div class="h-48 rounded-2xl bg-stone-100 mb-6 overflow-hidden relative">
-            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl text-center shadow-sm">
-              <span class="block text-orange-400 font-bold text-xl leading-none">15</span>
-              <span class="block text-stone-500 text-xs uppercase font-semibold mt-1">Jul</span>
-            </div>
-            <!-- Imagem ilustrativa do evento (Substitua o src pela imagem real) -->
-            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Evento ACITP" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-[bold] [font-family:Playfair_Display,serif] text-2xl leading-tight mb-3 text-stone-800">Arraiá Solidário</h3>
-          <p class="text-stone-500 text-sm mb-6 flex-grow">Venha participar da nossa festa com comidas típicas, música e muita alegria junto aos nossos idosos.</p>
-          <div class="flex flex-col gap-2 mb-6">
-            <div class="text-sm text-stone-600 flex items-center gap-2">
-              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> 14:00 - 18:00
-            </div>
-            <div class="text-sm text-stone-600 flex items-center gap-2">
-              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> Sede da ACITP
-            </div>
-          </div>
-          <a href="#" class="no-underline text-center w-full cursor-pointer font-semibold duration-300 ease-in-out px-6 py-3 rounded-xl border border-solid border-transparent text-stone-800 bg-orange-300 hover:brightness-110 active:-translate-y-px">Mais Informações</a>
-        </div>
+<header>
+    <nav>
+        <a href="#" class="logo">
+            <span><i class="fa-solid fa-heart"></i></span> ACITP
+        </a>
+        <ul class="menu">
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Nossa História</a></li>
+            <li><a href="#">Eventos</a></li>
+            <li><a href="#">Doações</a></li>
+            <li><a href="#">Voluntariado</a></li>
+            <li><a href="#">Depoimentos</a></li>
+            <li><a href="#">Contato</a></li>
+            <li><a href="#" class="botaoentrar" style="color: white;">Cadastrar</a></li>
+        </ul>
+    </nav>
+</header>
 
-        <!-- Card de Evento 2 -->
-        <div class="bg-white p-6 rounded-3xl border border-solid border-stone-200 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col">
-          <div class="h-48 rounded-2xl bg-stone-100 mb-6 overflow-hidden relative">
-            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl text-center shadow-sm">
-              <span class="block text-orange-400 font-bold text-xl leading-none">20</span>
-              <span class="block text-stone-500 text-xs uppercase font-semibold mt-1">Ago</span>
-            </div>
-            <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bazar Beneficente" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-[bold] [font-family:Playfair_Display,serif] text-2xl leading-tight mb-3 text-stone-800">Bazar Beneficente</h3>
-          <p class="text-stone-500 text-sm mb-6 flex-grow">Renove seu guarda-roupa e ajude a nossa causa. Diversas peças em ótimo estado com preços imperdíveis.</p>
-          <div class="flex flex-col gap-2 mb-6">
-            <div class="text-sm text-stone-600 flex items-center gap-2">
-              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> 09:00 - 17:00
-            </div>
-            <div class="text-sm text-stone-600 flex items-center gap-2">
-              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> Galpão Comunitário
-            </div>
-          </div>
-          <a href="#" class="no-underline text-center w-full cursor-pointer font-semibold duration-300 ease-in-out px-6 py-3 rounded-xl border border-solid border-transparent text-stone-800 bg-orange-300 hover:brightness-110 active:-translate-y-px">Mais Informações</a>
-        </div>
+<section class="eventos" id="eventos">
+    <div class="container" id="eventos-container"></div>
+    
+    <div id="loader" class="loader" style="display: none;">
+        <i class="fa-solid fa-spinner fa-spin" style="font-size: 28px; color: #476E56;"></i>
+    </div>
+</section>
 
-        <!-- Card de Evento 3 -->
-        <div class="bg-white p-6 rounded-3xl border border-solid border-stone-200 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-all duration-300 flex flex-col">
-          <div class="h-48 rounded-2xl bg-stone-100 mb-6 overflow-hidden relative">
-            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-3 py-2 rounded-xl text-center shadow-sm">
-              <span class="block text-orange-400 font-bold text-xl leading-none">12</span>
-              <span class="block text-stone-500 text-xs uppercase font-semibold mt-1">Out</span>
-            </div>
-            <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Almoço de Confraternização" class="w-full h-full object-cover">
-          </div>
-          <h3 class="font-[bold] [font-family:Playfair_Display,serif] text-2xl leading-tight mb-3 text-stone-800">Almoço Especial</h3>
-          <p class="text-stone-500 text-sm mb-6 flex-grow">Um almoço delicioso feito com muito carinho para celebrar as conquistas do ano com nossos voluntários e idosos.</p>
-          <div class="flex flex-col gap-2 mb-6">
-            <div class="text-sm text-stone-600 flex items-center gap-2">
-              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> 12:00 - 15:00
-            </div>
-            <div class="text-sm text-stone-600 flex items-center gap-2">
-              <i class="[font-family:&quot;Font_Awesome_6_Free&quot;] not-italic font-black before:content-[&quot;&quot;]"></i> Sede da ACITP
-            </div>
-          </div>
-          <a href="#" class="no-underline text-center w-full cursor-pointer font-semibold duration-300 ease-in-out px-6 py-3 rounded-xl border border-solid border-transparent text-stone-800 bg-orange-300 hover:brightness-110 active:-translate-y-px">Mais Informações</a>
-        </div>
-
+<footer>
+  <div class="footer-content">
+    <div>
+      <div class="footer-logo">
+        <i class="fa-solid fa-heart heart"></i>
+        <span>ACITP</span>
       </div>
-    </section>
+      <p class="footer-desc">
+        Transformando vidas com amor e dignidade desde 2010.
+        Cada idoso merece ser cuidado com carinho.
+      </p>
+    </div>
+
+    <div class="footer-column contact-info">
+      <h3>Contato</h3>
+      <p><i class="fa-solid fa-phone"></i> (+55) 21 96441-4945</p>
+      <p><a href="mailto:acitp2010@gmail.com"><i class="fa-solid fa-envelope"></i>        acitp2010@gmail.com</a></p>
+      <p><i class="fa-solid fa-location-dot"></i> Estrada do Babi, 14455, Vila Magalhães em Belford Roxo</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Links Úteis</h3>
+      <ul>
+        <li><a href="#">Nossa História</a></li>
+        <li><a href="#">Eventos</a></li>
+        <li><a href="#">Doações</a></li>
+        <li><a href="#">Voluntariado</a></li>
+        <li><a href="#">Depoimentos</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 ONG ACITP. Todos os direitos reservados.
+  </div>
+</footer>
+
+<script src="eventos.js"></script>
+</body>
+</html>
