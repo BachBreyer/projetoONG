@@ -8,11 +8,11 @@
 {% endblock %}
 
 {% block content %}
-<section class="page-hero simple-hero">
-    <div class="container center-text section-stack small-stack">
-        <span class="eyebrow"><i class="fa-solid fa-calendar-star"></i> Agenda solidária</span>
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">Agenda solidária</span>
         <h1>Nossos Eventos</h1>
-        <p class="section-copy max-text">Acompanhe a programação, festividades e encontros da ACITP. Participe e traga sua alegria para nossos idosos.</p>
+        <p>Acompanhe a programação, festividades e encontros da ACITP. Participe e traga sua alegria para nossos idosos.</p>
     </div>
 </section>
 
@@ -20,7 +20,7 @@
     <div class="container">
         <div id="eventos-container">
             {% for event in events %}
-                <!-- A classe 'reverse' é aplicada de forma alternada usando o divisível por 2 (forloop.counter0) -->
+                <!-- A classe 'reverse' é aplicada de forma alternada -->
                 <div class="evento-row {% if forloop.counter0|divisibleby:2 == False %}reverse{% endif %}">
                     <div class="evento-text">
                         <h2>{{ event.title }}</h2>
@@ -38,12 +38,20 @@
                     {% endif %}
                 </div>
             {% empty %}
-                <div class="field-full center-text" style="padding: 4rem 2rem; background: var(--card); border-radius: var(--radius); border: 2px dashed var(--border);">
-                    <div style="font-size: 3rem; color: var(--border); margin-bottom: 1rem;"><i class="fa-solid fa-calendar-xmark"></i></div>
+                <!-- Card de Nenhum Evento (idêntico à referência) -->
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="fa-solid fa-calendar-xmark"></i>
+                    </div>
                     <h2>Nenhum evento cadastrado</h2>
                     <p>Em breve teremos novas programações. Fique atento!</p>
                 </div>
             {% endfor %}
+        </div>
+
+        <!-- Indicador de Loading -->
+        <div id="loader" class="loader" style="display: none; text-align: center;">
+            <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--green);"></i>
         </div>
     </div>
 </section>
