@@ -1,39 +1,24 @@
-{% extends 'core/base.html' %}
-{% load static %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'core/css/depoimentos.css' %}">
-{% endblock %}
-
-{% block content %}
-<section class="container page-depoimentos my-5">
-    <div class="text-center depoimentos-header">
-        <h1 class="display-5 fw-bold text-dark">Depoimentos</h1>
-        <p class="lead text-muted">Histórias de transformação e experiências de nossa comunidade.</p>
+<section class="depoimentos-section">
+  <div class="container">
+    <!-- Cabeçalho da Seção -->
+    <div class="section-header text-center">
+      <span class="section-subtitle">&#10077;&#10077; VOZES QUE INSPIRAM</span>
+      <h2 class="section-title">Depoimentos</h2>
+      <p class="section-description">
+        Histórias de amor, cuidado e transformação compartilhadas por nossos idosos, familiares e voluntários.
+      </p>
     </div>
 
-    <div class="row g-4 justify-content-center">
-        {% for depoimento in depoimentos %}
-        <div class="col-md-6 col-lg-4">
-            <div class="card card-depoimento h-100 p-3">
-                <div class="card-body d-flex flex-column align-items-center text-center">
-                    {% if depoimento.foto %}
-                        <img src="{{ depoimento.foto.url }}" alt="{{ depoimento.nome }}" class="rounded-circle mb-3 img-depoimento">
-                    {% else %}
-                        <img src="{% static 'core/img/user-placeholder.png' %}" alt="Avatar" class="rounded-circle mb-3 img-depoimento">
-                    {% endif %}
-
-                    <h5 class="fw-bold mb-1 text-dark">{{ depoimento.nome }}</h5>
-                    <span class="badge bg-light text-primary mb-3">{{ depoimento.cargo_ou_relacao|default:"Voluntário(a)" }}</span>
-                    <p class="depoimento-texto fst-italic">"{{ depoimento.texto }}"</p>
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <div class="col-12 text-center py-5">
-            <p class="text-muted">Nenhum depoimento cadastrado até o momento.</p>
-        </div>
-        {% endfor %}
+    <!-- Card de Estado Vazio -->
+    <div class="empty-state-card">
+      <div class="empty-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#d5c8bb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          <line x1="2" y1="2" x2="22" y2="22"></line>
+        </svg>
+      </div>
+      <h3 class="empty-title">Ainda não temos depoimentos</h3>
+      <p class="empty-subtitle">Em breve compartilharemos as primeiras histórias aqui.</p>
     </div>
+  </div>
 </section>
-{% endblock %}
