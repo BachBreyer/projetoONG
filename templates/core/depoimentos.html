@@ -1,0 +1,28 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}ACITP - Depoimentos{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/depoimentos.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="depoimentos">
+  <div class="container">
+    <div class="section-tag">O QUE DIZEM</div>
+    <h2 class="section-title">Depoimentos</h2>
+
+    <div class="cards">
+      {% for depoimento in depoimentos %}
+        <div class="card">
+          <span class="quote-icon">”</span>
+          <p>"{{ depoimento.texto }}"</p>
+          <div class="divider"></div>
+          <div class="name">{{ depoimento.nome }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
