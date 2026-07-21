@@ -18,85 +18,33 @@
 
 <section class="section eventos">
     <div class="container">
-        <!-- Container onde o JavaScript vai injetar os eventos em linhas alternadas -->
         <div id="eventos-container">
-            {% if not events %}
-                <!-- Caso queira manter um fallback estático do Django caso não haja eventos via JS, 
-                     ou você pode deixar o JS popular os dados do array "eventos" -->
-            {% endif %}
-        </div>
-
-        <!-- Indicador de Loading -->
-        <div id="loader" class="loader" style="display: none; text-align: center;">
-            <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--green);"></i>
+            {% for event in events %}
+                <!-- A classe 'reverse' é aplicada de forma alternada usando o divisível por 2 (forloop.counter0) -->
+                <div class="evento-row {% if forloop.counter0|divisibleby:2 == False %}reverse{% endif %}">
+                    <div class="evento-text">
+                        <h2>{{ event.title }}</h2>
+                        <p>{{ event.description }}</p>
+                        <div style="margin-top: 15px; font-size: 13px; color: var(--muted);">
+                            <i class="fa-solid fa-calendar-day"></i> {{ event.starts_at|date:"d/m/Y H:i" }} | 
+                            <i class="fa-solid fa-location-dot"></i> {{ event.location }}
+                        </div>
+                    </div>
+                    
+                    {% if event.image %}
+                        <div class="evento-img" style="background-image: url('{{ event.image.url }}'); background-size: cover; background-position: center;"></div>
+                    {% else %}
+                        <div class="evento-img" style="background: #d9d9d9;"></div>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <div class="field-full center-text" style="padding: 4rem 2rem; background: var(--card); border-radius: var(--radius); border: 2px dashed var(--border);">
+                    <div style="font-size: 3rem; color: var(--border); margin-bottom: 1rem;"><i class="fa-solid fa-calendar-xmark"></i></div>
+                    <h2>Nenhum evento cadastrado</h2>
+                    <p>Em breve teremos novas programações. Fique atento!</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-    // Seus dados do JavaScript integrados para manter o layout dinâmico da primeira imagem
-    const eventos = [
-        { titulo: "Feira de Adoção de Animais", descricao: "Venha conhecer e adotar um novo amigo! Contaremos com mais de 30 animais resgatados esperando por um lar.", imagem: "#d9d9d9" },
-        { titulo: "Dia da Solidariedade", descricao: "Distribuição de cestas básicas e roupas para famílias em vulnerabilidade na região de Belford Roxo.", imagem: "#d9d9d9" },
-        { titulo: "Workshop de Educação Ambiental", descricao: "Aprenda como reduzir o impacto ambiental no dia a dia com palestras e atividades práticas.", imagem: "#d9d9d9" },
-        { titulo: "Bazar Beneficente", descricao: "Todo o valor arrecadado será revertido para a compra de medicamentos e alimentos para as famílias assistidas.", imagem: "#d9d9d9" },
-        { titulo: "Caminhada pela Inclusão", descricao: "Participe da grande caminhada em prol da inclusão social e direitos das pessoas com deficiência.", imagem: "#d9d9d9" },
-        { titulo: "Natal Solidário 2025", descricao: "Ajude a fazer o Natal de mais de 200 crianças mais brilhante com doações de brinquedos e alimentos.", imagem: "#d9d9d9" }
-    ];
-
-    let eventosCarregados = 0;
-    const eventosPorVez = 2;
-    const container = document.getElementById('eventos-container');
-    const loader = document.getElementById('loader');
-
-    function criarEvento(evento, index) {
-        const row = document.createElement('div');
-        row.className = `evento-row ${index % 2 === 1 ? 'reverse' : ''}`;
-        row.innerHTML = `
-            <div class="evento-text">
-                <h2>${evento.titulo}</h2>
-                <p>${evento.descricao}</p>
-            </div>
-            <div class="evento-img" style="background: ${evento.imagem};"></div>
-        `;
-        return row;
-    }
-
-    function carregarMaisEventos() {
-        if (eventosCarregados >= eventos.length) return;
-        
-        loader.style.display = 'block';
-
-        setTimeout(() => {
-            const start = eventosCarregados;
-            const end = Math.min(start + eventosPorVez, eventos.length);
-
-            for (let i = start; i < end; i++) {
-                const eventoHTML = criarEvento(eventos[i], i);
-                container.appendChild(eventoHTML);
-            }
-
-            eventosCarregados = end;
-            loader.style.display = 'none';
-
-            if (eventosCarregados >= eventos.length) {
-                window.removeEventListener('scroll', handleScroll);
-            }
-        }, 700);
-    }
-
-    function handleScroll() {
-        const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-        if (scrollTop + clientHeight >= scrollHeight - 350) {
-            carregarMaisEventos();
-        }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        carregarMaisEventos();
-        window.addEventListener('scroll', handleScroll);
-    });
-</script>
 {% endblock %}
