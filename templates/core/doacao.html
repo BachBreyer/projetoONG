@@ -1,0 +1,148 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}ACITP - Doações{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'core/css/doacao.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="doacao" id="doacao">
+  <div class="container">
+    <div class="doacao-header">
+      <span class="tag">Faça a diferença</span>
+      <h2>Apoie Nossa Causa</h2>
+      <p>Sua contribuição garante alimentação, medicamentos, manutenção da casa e atividades para os idosos.</p>
+    </div>
+
+    <div class="doacao-grid">
+      <div class="pix-wrap">
+        <div class="pix-card">
+          <h3>Doe agora via PIX</h3>
+          <p class="sub">Escaneie o QR Code ou copie a chave</p>
+          <div class="qr" aria-label="QR Code"></div>
+          <div class="pix-key">
+            <span id="pix-chave">{{ instituicao.chave_pix|default:"acitp2010@gmail.com" }}</span>
+            <button type="button" class="copiar-pix" title="Copiar chave PIX" aria-label="Copiar chave PIX">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+          <a href="{% url 'doacoes' %}" class="btn btn-green copiar-pix">Copiar Chave PIX</a>
+        </div>
+        <a href="{% url 'voluntariado' %}" class="seja-voluntario">Seja Voluntário</a>
+      </div>
+
+      <div class="tiers">
+        <div class="tier">
+          <div class="check"><i class="fa-regular fa-heart"></i></div>
+          <div>
+            <h4>R$10</h4>
+            <p>Ajuda na alimentação de uma família por uma semana.</p>
+          </div>
+        </div>
+        <div class="tier">
+          <div class="check"><i class="fa-regular fa-heart"></i></div>
+          <div>
+            <h4>R$25</h4>
+            <p>Contribui com medicamentos essenciais por um mês.</p>
+          </div>
+        </div>
+        <div class="tier">
+          <div class="check"><i class="fa-regular fa-heart"></i></div>
+          <div>
+            <h4>R$50</h4>
+            <p>Materiais de cuidado e higiene para os residentes.</p>
+          </div>
+        </div>
+        <div class="tier">
+          <div class="check"><i class="fa-regular fa-heart"></i></div>
+          <div>
+            <h4>R$100</h4>
+            <p>Cesta de cuidado completa para um idoso por mês.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form method="post" class="pix-card" style="margin-top: 32px;">
+      {% csrf_token %}
+      <h3>Registrar intenção de doação</h3>
+
+      {% if messages %}
+        {% for message in messages %}
+          <p class="form-feedback form-feedback-{{ message.tags|default:'success' }}">
+            <i class="fa-solid fa-circle-check"></i>
+            {{ message }}
+          </p>
+        {% endfor %}
+      {% endif %}
+
+      {% if form.errors %}
+        <p class="sub">Confira os dados informados e tente novamente.</p>
+      {% endif %}
+
+      <input name="doador_nome" placeholder="Seu nome" style="margin-bottom: 12px; padding: 12px; width: 100%;">
+      <input name="doador_email" type="email" placeholder="Seu e-mail" style="margin-bottom: 12px; padding: 12px; width: 100%;">
+      <input name="doador_telefone" placeholder="Telefone" style="margin-bottom: 12px; padding: 12px; width: 100%;">
+      <select name="tipo" style="margin-bottom: 12px; padding: 12px; width: 100%;">
+        <option value="dinheiro">Dinheiro</option>
+        <option value="alimento">Alimento</option>
+        <option value="medicamento">Medicamento</option>
+        <option value="item">Item</option>
+        <option value="outro">Outro</option>
+      </select>
+      <input name="valor" type="number" step="0.01" placeholder="Valor em R$ (opcional)" style="margin-bottom: 12px; padding: 12px; width: 100%;">
+      <input name="item_doado" placeholder="Item doado (opcional)" style="margin-bottom: 12px; padding: 12px; width: 100%;">
+      <input name="quantidade" placeholder="Quantidade (opcional)" style="margin-bottom: 12px; padding: 12px; width: 100%;">
+      <textarea name="descricao" placeholder="Descrição da doação" required style="margin-bottom: 12px; min-height: 100px; padding: 12px; width: 100%;"></textarea>
+      <button type="submit" class="btn btn-green">Registrar Doação</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const pixChave = document.getElementById("pix-chave").textContent.trim();
+  const botoesCopiar = document.querySelectorAll(".copiar-pix");
+
+  function copiarComFallback(texto) {
+    const campoTemporario = document.createElement("textarea");
+    campoTemporario.value = texto;
+    campoTemporario.setAttribute("readonly", "");
+    campoTemporario.style.position = "fixed";
+    campoTemporario.style.opacity = "0";
+    document.body.appendChild(campoTemporario);
+    campoTemporario.select();
+    document.execCommand("copy");
+    document.body.removeChild(campoTemporario);
+  }
+
+  async function copiarPix(event) {
+    event.preventDefault();
+
+    try {
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(pixChave);
+      } else {
+        copiarComFallback(pixChave);
+      }
+    } catch {
+      copiarComFallback(pixChave);
+    }
+
+    const botao = event.currentTarget;
+    const textoOriginal = botao.innerHTML;
+    botao.innerHTML = botao.tagName === "A" ? "Chave copiada!" : '<i class="fa-solid fa-check"></i>';
+
+    setTimeout(() => {
+      botao.innerHTML = textoOriginal;
+    }, 1800);
+  }
+
+  botoesCopiar.forEach((botao) => {
+    botao.addEventListener("click", copiarPix);
+  });
+</script>
+{% endblock %}
