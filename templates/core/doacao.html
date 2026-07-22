@@ -16,55 +16,6 @@
       <p>Sua contribuição garante alimentação, medicamentos, manutenção da casa e atividades para os idosos.</p>
     </div>
 
-    <div class="doacao-grid">
-      <div class="pix-wrap">
-        <div class="pix-card">
-          <h3>Doe agora via PIX</h3>
-          <p class="sub">Escaneie o QR Code ou copie a chave</p>
-          <div class="qr" aria-label="QR Code"></div>
-          <div class="pix-key">
-            <span id="pix-chave">{{ instituicao.chave_pix|default:"acitp2010@gmail.com" }}</span>
-            <button type="button" class="copiar-pix" title="Copiar chave PIX" aria-label="Copiar chave PIX">
-              <i class="fa-regular fa-copy"></i>
-            </button>
-          </div>
-          <a href="{% url 'doacoes' %}" class="btn btn-green copiar-pix">Copiar Chave PIX</a>
-        </div>
-        <a href="{% url 'voluntariado' %}" class="seja-voluntario">Seja Voluntário</a>
-      </div>
-
-      <div class="tiers">
-        <div class="tier">
-          <div class="check"><i class="fa-regular fa-heart"></i></div>
-          <div>
-            <h4>R$10</h4>
-            <p>Ajuda na alimentação de uma família por uma semana.</p>
-          </div>
-        </div>
-        <div class="tier">
-          <div class="check"><i class="fa-regular fa-heart"></i></div>
-          <div>
-            <h4>R$25</h4>
-            <p>Contribui com medicamentos essenciais por um mês.</p>
-          </div>
-        </div>
-        <div class="tier">
-          <div class="check"><i class="fa-regular fa-heart"></i></div>
-          <div>
-            <h4>R$50</h4>
-            <p>Materiais de cuidado e higiene para os residentes.</p>
-          </div>
-        </div>
-        <div class="tier">
-          <div class="check"><i class="fa-regular fa-heart"></i></div>
-          <div>
-            <h4>R$100</h4>
-            <p>Cesta de cuidado completa para um idoso por mês.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <form method="post" class="pix-card" style="margin-top: 32px;">
       {% csrf_token %}
       <h3>Registrar intenção de doação</h3>

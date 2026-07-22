@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from .models import (
-    Depoimento,
+    Testimonial,
     Doacao,
     EventoCampanha,
     Instituicao,
@@ -48,11 +48,11 @@ class EventoCampanhaAdmin(admin.ModelAdmin):
         )
 
 
-@admin.register(Depoimento)
-class DepoimentoAdmin(admin.ModelAdmin):
-    list_display = ['nome', 'cargo_ou_relacao', 'ativo', 'criado_em']
-    list_filter = ['ativo', 'criado_em']
-    search_fields = ['nome', 'texto', 'cargo_ou_relacao']
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ("author_name", "author_role", "is_featured", "is_active")
+    list_filter = ("is_featured", "is_active")
+    search_fields = ("author_name", "author_role", "content")
 
 
 @admin.register(MensagemContato)

@@ -23,6 +23,16 @@ class Instituicao(models.Model):
     def __str__(self):
         return self.nome
 
+class OrderedContent(models.Model):
+    order = models.PositiveIntegerField(default=0, verbose_name="Ordem")
+    is_active = models.BooleanField(default=True, verbose_name="Ativo")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+        ordering = ("order", "id")
+
 
 class Voluntario(models.Model):
     STATUS_NOVO = 'novo'
@@ -120,18 +130,18 @@ class EventoCampanha(models.Model):
         return self.titulo
 
 
-class Depoimento(models.Model):
-    nome = models.CharField(max_length=120)
-    texto = models.TextField()
-    cargo_ou_relacao = models.CharField(max_length=120, blank=True)
-    ativo = models.BooleanField(default=True)
-    criado_em = models.DateTimeField(auto_now_add=True)
+class Testimonial(OrderedContent):
+    author_name = models.CharField(max_length=120)
+    author_role = models.CharField(max_length=120, blank=True)
+    content = models.TextField()
+    is_featured = models.BooleanField(default=True, verbose_name="Destacar na home")
 
-    class Meta:
-        ordering = ['-criado_em']
+    class Meta(OrderedContent.Meta):
+        verbose_name = "Depoimento"
+        verbose_name_plural = "Depoimentos"
 
     def __str__(self):
-        return self.nome
+        return self.author_name
 
 
 class MensagemContato(models.Model):
@@ -170,3 +180,75 @@ class PrestacaoConta(models.Model):
 
     def __str__(self):
         return self.titulo
+
+class SiteConfiguration(models.Model):
+    organization_name = models.CharField(max_length=120, default="ACITP")
+    hero_badge = models.CharField(
+        max_length=180,
+        default="ONG ACITP - A CASA DO IDOSO PARA TODOS OS POVOS",
+    )
+    hero_title = models.CharField(
+        max_length=180,
+        default="Cuidando de quem sempre cuidou de nos",
+    )
+    hero_description = models.TextField(
+        default=(
+            "Ha 15 anos levando dignidade, amor e qualidade de vida para idosos "
+            "em situacao de vulnerabilidade."
+        )
+    )
+    history_title = models.CharField(
+        max_length=180,
+        default="Uma decada de amor e dedicacao",
+    )
+    history_description = models.TextField(
+        default=(
+            "Fundada em 2010, a ACITP nasceu para acolher idosos em "
+            "vulnerabilidade com dignidade, cuidado e presenca diaria."
+        )
+    )
+    history_highlight = models.CharField(max_length=140, default="Nossa Historia")
+    director_role = models.CharField(max_length=120, default="Diretor e Fundador")
+    director_name = models.CharField(max_length=120, default="Pastor Marcio Vieira")
+    services_title = models.CharField(max_length=140, default="Nossos Servicos")
+    services_description = models.TextField(
+        default="Oferecemos um cuidado integral, atendendo as necessidades fisicas, emocionais e sociais dos nossos idosos."
+    )
+    donation_title = models.CharField(max_length=140, default="Apoie Nossa Causa")
+    donation_description = models.TextField(
+        default="Sua contribuicao ajuda na alimentacao, nos medicamentos, nos eventos e na manutencao da instituicao."
+    )
+    pix_key = models.CharField(max_length=180, default="acitp2010@gmail.com")
+    volunteer_title = models.CharField(max_length=140, default="Seja Voluntario")
+    volunteer_intro = models.TextField(
+        default="Doe seu tempo e suas habilidades. Precisamos de pessoas dispostas a fazer companhia, apoiar e cuidar."
+    )
+    volunteer_benefits = models.TextField(
+        default=(
+            "Atividades recreativas e culturais\n"
+            "Acompanhamento em consultas medicas\n"
+            "Apoio administrativo e logistico\n"
+            "Oficinas de artesanato e musica"
+        )
+    )
+    contact_phone = models.CharField(max_length=40, default="(+55) 21 96441-4945")
+    contact_email = models.EmailField(default="acitp2010@gmail.com")
+    contact_address = models.TextField(
+        default="Estrada do Babi, 14455, Vila Magalhaes em Belford Roxo"
+    )
+    footer_text = models.TextField(
+        default="Transformando vidas com amor e dignidade desde 2010. Cada idoso merece ser cuidado com carinho."
+    )
+    hero_image = models.FileField(upload_to="site/", blank=True, null=True)
+    events_banner = models.FileField(upload_to="site/", blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Configuracao do site"
+        verbose_name_plural = "Configuracao do site"
+
+    def __str__(self):
+        return f"Configuracao - {self.organization_name}"
+
+    @property
+    def volunteer_benefits_list(self):
+        return [item.strip() for item in self.volunteer_benefits.splitlines() if item.strip()]

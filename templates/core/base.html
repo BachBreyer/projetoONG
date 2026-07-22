@@ -10,8 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
-  {% block extra_css %}{% endblock %}
+  
   <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+  {% block extra_css %}{% endblock %}
 </head>
 <body>
   <header>
@@ -26,7 +27,7 @@
         <li><a href="{% url 'eventos' %}">Eventos</a></li>
         <li><a href="{% url 'doacoes' %}">Doações</a></li>
         <li><a href="{% url 'voluntariado' %}">Voluntariado</a></li>
-        <li><a href="{% url 'depoimentos' %}">Depoimentos</a></li>
+        <li><a href="{% url 'testimonials' %}">Depoimentos</a></li>
         <li><a href="{% url 'home' %}#footer">Contato</a></li>
         {% if request.user.is_authenticated and request.user.is_staff %}
           <li><a href="/admin/" class="botaoentrar painel-link">Painel</a></li>
@@ -39,9 +40,10 @@
       </ul>
     </nav>
   </header>
+  <main>
 
-  {% block content %}{% endblock %}
-
+    {% block content %}{% endblock %}
+  </main>
   <footer id="footer">
     <div class="footer-content">
       <div>
@@ -71,7 +73,7 @@
           <li><a href="{% url 'eventos' %}">Eventos</a></li>
           <li><a href="{% url 'doacoes' %}">Doações</a></li>
           <li><a href="{% url 'voluntariado' %}">Voluntariado</a></li>
-          <li><a href="{% url 'depoimentos' %}">Depoimentos</a></li>
+          <li><a href="{% url 'testimonials' %}">Depoimentos</a></li>
         </ul>
       </div>
     </div>

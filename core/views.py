@@ -5,7 +5,15 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 
 from .forms import CadastroUsuarioForm, DoacaoForm, LoginForm, VoluntarioForm
-from .models import Depoimento, EventoCampanha, Instituicao, PrestacaoConta
+from .models import Testimonial, EventoCampanha, Instituicao, PrestacaoConta, SiteConfiguration
+
+
+
+def get_site_config():
+    return SiteConfiguration.objects.first() or SiteConfiguration()
+
+def common_context():
+    return {"site_config": get_site_config()}
 
 
 DEFAULT_EVENTOS = [
@@ -25,20 +33,6 @@ DEFAULT_EVENTOS = [
     },
 ]
 
-DEFAULT_DEPOIMENTOS = [
-    {
-        'nome': 'Dona Maria, 78 anos',
-        'texto': 'Aqui encontrei uma nova familia. As atividades me dao alegria de viver e os voluntarios sao anjos na minha vida.',
-    },
-    {
-        'nome': 'Luciana Silva',
-        'texto': 'Desde que meu pai chegou ao Lar, sinto uma paz imensa. O carinho e a atencao que ele recebe sao visiveis em seu sorriso diario.',
-    },
-    {
-        'nome': 'Ricardo Oliveira',
-        'texto': 'O atendimento medico e as atividades recreativas superaram todas as nossas expectativas.',
-    },
-]
 
 
 def get_instituicao():
@@ -50,16 +44,29 @@ def get_eventos():
     return eventos or DEFAULT_EVENTOS
 
 
-def get_depoimentos():
-    depoimentos = list(Depoimento.objects.filter(ativo=True)[:6])
-    return depoimentos or DEFAULT_DEPOIMENTOS
-
+def testimonials_page(request):
+    return render(request, "core/testimonials.html", {
+        **common_context(),
+        "testimonials": Testimonial.objects.filter(is_active=True),
+    })
 
 def home(request):
+    context = {
+        **common_context(),
+        
+        "featured_testimonials": Testimonial.objects.filter(
+            is_active=True,
+            is_featured=True,
+        )[:3],
+    }
+
     return render(request, 'core/home.html', {
         'instituicao': get_instituicao(),
         'eventos': get_eventos()[:2],
-        'depoimentos': get_depoimentos()[:3],
+        'testimonials': Testimonial.objects.filter(
+    is_active=True,
+    is_featured=True,
+)[:3],
     })
 
 
@@ -102,12 +109,6 @@ def voluntariado(request):
         'form': form,
     })
 
-
-def depoimentos(request):
-    return render(request, 'core/depoimentos.html', {
-        'instituicao': get_instituicao(),
-        'depoimentos': get_depoimentos(),
-    })
 
 
 def transparencia(request):

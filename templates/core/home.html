@@ -442,7 +442,7 @@
     </div>
 
     <div class="testimonials-grid">
-      {% for depoimento in depoimentos %}
+      {% for testimonials in testimonials %}
       <div class="testimonial-card testimonials-slide-item">
         <svg class="quote-icon quote-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path d="M10 11H6a4 4 0 0 1 4-4V5a6 6 0 0 0-6 6v6h6v-6Z"></path>
@@ -464,7 +464,7 @@
     </div>
 
     <div class="text-center mt-8">
-      <a href="{% url 'depoimentos' %}" class="btn btn-outline testimonials-btn testimonials-pop-item">
+      <a href="{% url 'testimonials' %}" class="btn btn-outline testimonials-btn testimonials-pop-item">
         Ver mais depoimentos
 
         <svg class="btn-arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
