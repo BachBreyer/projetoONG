@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from django.utils import timezone
 
 from .forms import CadastroUsuarioForm, DoacaoForm, LoginForm, VoluntarioForm
-from .models import Testimonial, EventoCampanha, Instituicao, PrestacaoConta, SiteConfiguration
+from .models import Testimonial, Event, Instituicao, PrestacaoConta, SiteConfiguration
 
 
 
@@ -16,32 +16,16 @@ def common_context():
     return {"site_config": get_site_config()}
 
 
-DEFAULT_EVENTOS = [
-    {
-        'titulo': 'Festival da Primavera',
-        'descricao': 'Festa com musica, danca e atividades ao ar livre para os idosos e suas familias.',
-        'data_inicio': timezone.datetime(2026, 3, 15, 14, tzinfo=timezone.get_current_timezone()),
-        'data_fim': timezone.datetime(2026, 3, 15, 18, tzinfo=timezone.get_current_timezone()),
-        'local': 'Sede Principal',
-    },
-    {
-        'titulo': 'Bazar Solidario',
-        'descricao': 'Bazar beneficente com roupas, artesanato e comidas tipicas.',
-        'data_inicio': timezone.datetime(2026, 4, 22, 9, tzinfo=timezone.get_current_timezone()),
-        'data_fim': timezone.datetime(2026, 4, 22, 17, tzinfo=timezone.get_current_timezone()),
-        'local': 'Praca Central',
-    },
-]
-
-
-
 def get_instituicao():
     return Instituicao.objects.first() or Instituicao()
 
 
-def get_eventos():
-    eventos = list(EventoCampanha.objects.filter(ativo=True)[:6])
-    return eventos or DEFAULT_EVENTOS
+def events_page(request):
+    context = {
+        **common_context(),
+        "events": Event.objects.filter(is_active=True),
+    }
+    return render(request, "core/events.html", context)
 
 
 def testimonials_page(request):
@@ -51,22 +35,14 @@ def testimonials_page(request):
     })
 
 def home(request):
-    context = {
+    return render(request, 'core/home.html', {
         **common_context(),
-        
-        "featured_testimonials": Testimonial.objects.filter(
+        'instituicao': get_instituicao(),
+        'eventos': Event.objects.filter(is_active=True)[:2],
+        'testimonials': Testimonial.objects.filter(
             is_active=True,
             is_featured=True,
         )[:3],
-    }
-
-    return render(request, 'core/home.html', {
-        'instituicao': get_instituicao(),
-        'eventos': get_eventos()[:2],
-        'testimonials': Testimonial.objects.filter(
-    is_active=True,
-    is_featured=True,
-)[:3],
     })
 
 
@@ -76,8 +52,9 @@ def historia(request):
 
 def eventos(request):
     return render(request, 'core/eventos.html', {
+        **common_context(),
         'instituicao': get_instituicao(),
-        'eventos': get_eventos(),
+        'eventos': Event.objects.filter(is_active=True),
     })
 
 

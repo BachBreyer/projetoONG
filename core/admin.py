@@ -4,7 +4,7 @@ from django.utils.html import format_html
 from .models import (
     Testimonial,
     Doacao,
-    EventoCampanha,
+    Event,
     Instituicao,
     MensagemContato,
     PrestacaoConta,
@@ -31,21 +31,12 @@ class DoacaoAdmin(admin.ModelAdmin):
     list_filter = ['tipo', 'data']
     search_fields = ['doador_nome', 'doador_email', 'descricao', 'item_doado']
 
-
-@admin.register(EventoCampanha)
-class EventoCampanhaAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'categoria', 'data_inicio', 'local', 'preview_imagem', 'ativo']
-    list_filter = ['categoria', 'ativo', 'data_inicio']
-    search_fields = ['titulo', 'descricao', 'local']
-
-    @admin.display(description='Imagem')
-    def preview_imagem(self, obj):
-        if not obj.imagem:
-            return '-'
-        return format_html(
-            '<img src="{}" style="width: 72px; height: 52px; object-fit: cover; border-radius: 8px; border: 1px solid #d7ded9;">',
-            obj.imagem.url,
-        )
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ("title", "location", "starts_at", "is_featured", "is_active")
+    list_filter = ("is_featured", "is_active", "starts_at")
+    search_fields = ("title", "location", "description")
+    ordering = ("starts_at",)
 
 
 @admin.register(Testimonial)

@@ -99,36 +99,22 @@ class Doacao(models.Model):
     def __str__(self):
         return f'{self.get_tipo_display()} - {self.data:%d/%m/%Y}'
 
+class Event(OrderedContent):
+    title = models.CharField(max_length=140)
+    description = models.TextField()
+    location = models.CharField(max_length=140)
+    starts_at = models.DateTimeField(default=timezone.now)
+    ends_at = models.DateTimeField(blank=True, null=True)
+    image = models.FileField(upload_to="events/", blank=True, null=True)
+    is_featured = models.BooleanField(default=True, verbose_name="Destacar na home")
 
-class EventoCampanha(models.Model):
-    CATEGORIA_EVENTO = 'evento'
-    CATEGORIA_CAMPANHA = 'campanha'
-    CATEGORIA_ACAO = 'acao_social'
-    CATEGORIA_CHOICES = [
-        (CATEGORIA_EVENTO, 'Evento'),
-        (CATEGORIA_CAMPANHA, 'Campanha'),
-        (CATEGORIA_ACAO, 'Acao social'),
-    ]
-
-    titulo = models.CharField(max_length=150)
-    categoria = models.CharField(max_length=20, choices=CATEGORIA_CHOICES, default=CATEGORIA_EVENTO)
-    descricao = models.TextField()
-    data_inicio = models.DateTimeField()
-    data_fim = models.DateTimeField(null=True, blank=True)
-    local = models.CharField(max_length=180, blank=True)
-    imagem = models.ImageField(upload_to='eventos/', blank=True)
-    meta_arrecadacao = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    ativo = models.BooleanField(default=True)
-    criado_em = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['data_inicio']
-        verbose_name = 'evento ou campanha'
-        verbose_name_plural = 'eventos e campanhas'
+    class Meta(OrderedContent.Meta):
+        verbose_name = "Evento"
+        verbose_name_plural = "Eventos"
+        ordering = ("starts_at", "order", "id")
 
     def __str__(self):
-        return self.titulo
-
+        return self.title
 
 class Testimonial(OrderedContent):
     author_name = models.CharField(max_length=120)
