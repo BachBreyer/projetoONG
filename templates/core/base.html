@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 {% load static %}
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}ACITP - Casa do Idoso{% endblock %}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
-  
+
   <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
   {% block extra_css %}{% endblock %}
 </head>
+
 <body>
   <header>
     <nav>
@@ -25,18 +29,11 @@
         <li><a href="{% url 'home' %}">Início</a></li>
         <li><a href="{% url 'historia' %}">Nossa História</a></li>
         <li><a href="{% url 'events' %}">Eventos</a></li>
-        <li><a href="{% url 'doacoes' %}">Doações</a></li>
         <li><a href="{% url 'voluntariado' %}">Voluntariado</a></li>
         <li><a href="{% url 'testimonials' %}">Depoimentos</a></li>
         <li><a href="{% url 'home' %}#footer">Contato</a></li>
-        {% if request.user.is_authenticated and request.user.is_staff %}
-          <li><a href="/admin/" class="botaoentrar painel-link">Painel</a></li>
-        {% endif %}
-        {% if request.user.is_authenticated %}
-          <li><a href="{% url 'logout' %}" class="botaoentrar">Sair</a></li>
-        {% else %}
-          <li><a href="{% url 'login' %}" class="botaoentrar">Entrar</a></li>
-        {% endif %}
+        <li><a href="{% url 'home' %}#involve" class="botaoentrar">Doar</a></li>
+
       </ul>
     </nav>
   </header>
@@ -71,9 +68,17 @@
         <ul>
           <li><a href="{% url 'historia' %}">Nossa História</a></li>
           <li><a href="{% url 'events' %}">Eventos</a></li>
-          <li><a href="{% url 'doacoes' %}">Doações</a></li>
+          <li><a href="{% url 'home' %}#involve">Doar</a></li>
           <li><a href="{% url 'voluntariado' %}">Voluntariado</a></li>
           <li><a href="{% url 'testimonials' %}">Depoimentos</a></li>
+          {% if request.user.is_authenticated and request.user.is_staff %}
+          <li><a href="/admin/" class="botaoentrar painel-link">Painel</a></li>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+          <li><a href="{% url 'logout' %}" >Sair</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}" >Área administrativa</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -85,4 +90,5 @@
 
   {% block extra_js %}{% endblock %}
 </body>
+
 </html>
