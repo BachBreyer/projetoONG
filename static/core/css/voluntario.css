@@ -3,14 +3,30 @@
   padding: 0;
   box-sizing: border-box;
 }
- 
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
- 
+
+img, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 header {
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -19,47 +35,50 @@ header {
     top: 0;
     z-index: 100;
 }
- 
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
     max-width: 1400px;
     margin: 0 auto;
 }
- 
+
 .logo {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 24px;
+    font-size: clamp(19px, 4vw, 24px);
     font-weight: 700;
     color: #2C3E2F;
     text-decoration: none;
 }
- 
+
 .logo i {
     color: #457356;
 }
- 
+
 .menu {
     display: flex;
     list-style: none;
     gap: 30px;
     align-items: center;
+    flex-wrap: wrap;
 }
- 
+
 .menu a {
     text-decoration: none;
     color: #555;
     font-weight: 500;
     transition: color 0.3s;
 }
- 
+
 .menu a:hover {
     color: #476E56;
 }
- 
+
 .botaoentrar {
     background-color: #457356;
     color: white;
@@ -67,28 +86,30 @@ nav {
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
+    white-space: nowrap;
 }
- 
+
 .botaoentrar:hover {
     background-color: #8e6a2d;
 }
- 
+
 .container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   padding: 40px 10%;
   min-height: 700px;
+  height: 100%;
   background-color: #e1d4a6;
 }
- 
+
 .corpo {
   margin-top: 80px;
   margin-right: 55px;
   width: 50%;
   text-align: center;
 }
- 
+
 .corpo p {
   text-align: center;
   margin: 15px 0;
@@ -96,7 +117,7 @@ nav {
   font-family: Tahoma, sans-serif;
   color: #7d7167;
 }
- 
+
 .corpo h3 {
   color: #d8ae64;
   font-size: 18px;
@@ -104,14 +125,14 @@ nav {
   font-family: 'Squada One', sans-serif;
   text-align: center;
 }
- 
+
 .corpo h1 {
-  font-size: 36px;
+  font-size: clamp(24px, 4.5vw, 36px);
   margin: 10px 0;
   color: #372c25;
   text-align: center;
 }
- 
+
 .corpo ul {
   padding: 10px 0 25px 0;
   text-align: center;
@@ -119,13 +140,13 @@ nav {
   list-style-type: disc;
   list-style-position: inside;
 }
- 
+
 .corpo li {
   margin: 10px 0;
   text-align: center;
   color: #7d7167;
 }
- 
+
 .btn-doar {
   display: inline-flex;
   align-items: center;
@@ -143,11 +164,11 @@ nav {
   box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
   transition: background 0.3s;
 }
- 
+
 .btn-doar:hover {
   background: #2e5339;
 }
- 
+
 .btn-doar i {
   color: #FFFFFF;
   margin-right: 0;
@@ -160,7 +181,7 @@ nav {
   border-radius: 10px;
   height: auto;
 }
- 
+
 .form-box > p {
   background: #3B6B4C;
   color: #fff;
@@ -170,7 +191,7 @@ nav {
   font-size: 14px;
   font-family: Tahoma, sans-serif;
 }
- 
+
 .form-box .form-error {
   background: #8b3a3a;
   color: #fff;
@@ -180,7 +201,7 @@ nav {
   font-size: 14px;
   font-family: Tahoma, sans-serif;
 }
- 
+
 .form-box input,
 .form-box select,
 .form-box textarea {
@@ -190,33 +211,33 @@ nav {
   border-radius: 8px;
   border: none;
   font-family: Arial, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   background: #fff;
   color: #372c25;
   outline: none;
   transition: box-shadow 0.2s;
 }
- 
+
 .form-box input:focus,
 .form-box select:focus,
 .form-box textarea:focus {
   box-shadow: 0 0 0 2px #3B6B4C;
 }
- 
+
 .form-box select {
   cursor: pointer;
   color: #7d7167;
 }
- 
+
 .form-box select option:not([disabled]) {
   color: #372c25;
 }
- 
+
 .form-box textarea {
   height: 130px;
   resize: none;
 }
- 
+
 .btn-enviar {
   display: block;
   width: 80%;
@@ -233,22 +254,22 @@ nav {
   transition: background 0.3s;
   letter-spacing: 0.5px;
 }
- 
+
 .btn-enviar:hover {
   background: #2e5339;
 }
- 
+
 footer {
     background-color: #372C25;
     color: #ddd;
     padding: 40px 10% 10px;
 }
- 
+
 i {
     color: #D19847;
     margin-right: 10px;
 }
- 
+
 .footer-content {
     align-items: start;
     text-align: left;
@@ -258,7 +279,7 @@ i {
     grid-template-columns: 1fr 1fr 0.56fr;
     gap: 50px;
 }
- 
+
 .footer-logo {
     display: flex;
     align-items: center;
@@ -268,63 +289,63 @@ i {
     color: #FAF8F5;
     margin-bottom: 16px;
 }
- 
+
 .footer-logo span {
     color: #FAF8F5;
 }
- 
+
 .footer-desc {
     color: #D2CBC2;
     line-height: 1.6;
     max-width: 320px;
 }
- 
+
 .footer-column h3 {
     color: #D2CBC2;
     margin-bottom: 20px;
     font-size: 20px;
 }
- 
+
 .footer-column ul {
     list-style: none;
     font-size: 14px;
     text-align: left;
 }
- 
+
 .footer-column ul li {
     margin-bottom: 12px;
 }
- 
+
 .footer-column a {
     color: #D2CBC2;
     text-decoration: none;
     transition: color 0.3s;
 }
- 
+
 .footer-column a:hover {
     color: #858585;
 }
- 
+
 .contact-info {
     line-height: 2.2;
     font-size: 14px;
 }
- 
+
 .contact-info p {
     color: #D2CBC2;
     text-align: left;
 }
- 
+
 .contact-info a {
     color: #D2CBC2;
     text-decoration: none;
     font-size: 14px;
 }
- 
+
 .contact-info a:hover {
     color: #80807f;
 }
- 
+
 .footer-bottom {
     margin-top: 60px;
     padding-top: 20px;
@@ -334,174 +355,154 @@ i {
     font-size: 14px;
 }
 
+/* Faixa intermediária: evita coluna do footer espremida em tablets/notebooks pequenos */
+@media (max-width: 1200px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-column:last-child {
+        grid-column: span 2;
+    }
+}
+
 @media (max-width: 1024px) {
     .container {
         padding: 40px 5%;
     }
- 
+
     .corpo {
         margin-top: 60px;
         margin-right: 40px;
     }
 }
- 
+
 @media (max-width: 900px) {
     .footer-content {
         grid-template-columns: 1fr;
         gap: 40px;
     }
- 
+
+    .footer-column:last-child {
+        grid-column: span 1;
+    }
+
     .container {
         flex-direction: column;
         padding: 50px 20px;
         min-height: auto;
     }
- 
+
     .corpo {
         width: 100%;
         margin-right: 0;
         margin-top: 20px;
     }
- 
+
     .form-box {
         width: 100%;
         margin-top: 30px;
     }
- 
+
     .btn-enviar {
         width: 100%;
     }
 }
- 
+
 @media (max-width: 768px) {
     nav {
         flex-direction: column;
         gap: 15px;
     }
- 
+
     .menu {
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
     }
- 
+
     .botaoentrar {
         text-align: center;
     }
- 
-    .corpo h1 {
-        font-size: 28px;
-    }
- 
-    .corpo h3 {
-        font-size: 16px;
-    }
- 
-    .corpo p {
-        font-size: 15px;
-    }
- 
+
     .form-box {
         padding: 24px;
     }
- 
+
     footer {
         padding: 40px 6% 10px;
     }
 }
- 
+
 @media (max-width: 600px) {
     .container {
         padding: 36px 16px;
     }
- 
-    .corpo h1 {
-        font-size: 24px;
-    }
- 
-    .corpo h3 {
-        font-size: 15px;
-    }
- 
-    .corpo p,
-    .corpo li {
-        font-size: 14px;
-    }
- 
+
     .form-box {
         padding: 20px;
     }
- 
+
     .form-box input,
     .form-box select,
     .form-box textarea {
         padding: 12px 14px;
-        font-size: 14px;
         margin-bottom: 14px;
     }
- 
+
     .form-box textarea {
         height: 110px;
     }
- 
+
     .btn-enviar {
         padding: 14px;
         font-size: 14px;
         width: 100%;
     }
- 
+
     footer {
         padding: 25px 5% 15px;
     }
- 
+
     .footer-content {
-        grid-template-columns: 1fr;
         gap: 25px;
         text-align: center;
     }
- 
+
     .footer-logo {
         justify-content: center;
         font-size: 18px;
     }
- 
+
     .footer-desc {
         max-width: 100%;
         text-align: center;
     }
- 
+
     .footer-column ul {
         text-align: center;
     }
- 
+
     .contact-info p {
         text-align: center;
     }
- 
+
     .footer-bottom {
         margin-top: 30px;
     }
 }
- 
+
 @media (max-width: 380px) {
     .menu {
         gap: 10px;
         font-size: 13px;
     }
- 
-    .corpo h1 {
-        font-size: 21px;
-    }
- 
-    .corpo h3 {
-        font-size: 14px;
-    }
- 
+
     .btn-enviar {
         font-size: 13px;
         padding: 11px 20px;
     }
- 
+
     .btn-doar {
         font-size: 14px;
         padding: 11px 18px;
